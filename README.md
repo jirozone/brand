@@ -31,16 +31,18 @@ page background (3:1). It is not dark enough for body text (4.5:1).
 
 ## How the apps use it
 
-Each app commits a copy at `brand/tokens.json` and has:
+Each app commits copies of the files it uses (`brand/tokens.json`, `brand/wordmark.json`, its
+favicons and app icons) and has:
 
-- a unit test that fails if its stylesheet's `:root` drifts from the copy
-- `node scripts/sync-brand.mjs` to refresh the copy from this repo's `main`, and
-  `node scripts/sync-brand.mjs --check`, which CI runs to warn when the copy is behind
+- a unit test that fails if its stylesheet's `:root` drifts from `brand/tokens.json`
+- `node scripts/sync-brand.mjs` to refresh every copy from this repo's `main`, and
+  `node scripts/sync-brand.mjs --check`, which CI runs to warn, without failing, when any copy differs
 
 ## Changing the logo or icons
 
-Change `scripts/generate-assets.mjs`, run `npm run generate`, merge, then copy the files into each
-app (and its inline wordmark component) and bump the icons' `?v=` cache-busting query there.
+Change `scripts/generate-assets.mjs`, run `npm run generate` and merge. Then in each app run
+`node scripts/sync-brand.mjs` and bump the icons' `?v=` cache-busting query (portal: also
+`pnpm generate:ios-splash`).
 
 ## Changing a brand value
 
