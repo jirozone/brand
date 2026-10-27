@@ -8,7 +8,7 @@ it without a token.
 
 ## What's here
 
-- `tokens.json`: the brand font and the colour tokens every site shares, named after the shadcn
+- `tokens.json`: the brand font, the base corner radius and the colour tokens every site shares, named after the shadcn
   roles all three use (`primary`, `muted-foreground`, …). Colours are HSL channels (`"240 100% 9%"`).
   Tailwind 4 apps (apply, portal) declare them as `hsl(240 100% 9%)`, the Tailwind 3 website as the
   bare channels.
@@ -25,7 +25,10 @@ it without a token.
   - `og-image.png`: the 1200×630 link preview.
 
 App-specific tokens stay in each app: portal's credit-score risk scale and sidebar, the website's
-hero colours, corner radius and focus ring (not yet aligned).
+hero colours.
+
+`success` (`160 84% 33%`) is dark enough for white icons on it and for large text or icons on the
+page background (3:1). It is not dark enough for body text (4.5:1).
 
 ## How the apps use it
 
