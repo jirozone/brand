@@ -1,0 +1,15 @@
+{
+	"name": "jiro-brand",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"check": "node scripts/check.mjs",
+		"generate": "node scripts/generate-assets.mjs"
+	},
+	"devDependencies": {
+		"@fontsource-variable/google-sans-flex": "5.2.3",
+		"fontkit": "^2.0.4",
+		"sharp": "^0.34.4",
+		"wawoff2": "^2.0.1"
+	}
+}
