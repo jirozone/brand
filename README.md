@@ -21,6 +21,9 @@ it without a token.
     for browser tabs.
   - `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`: full-bleed mark for home screens; iOS
     and Android round the corners themselves.
+  - `profile-picture.png`: the full-bleed mark at 1024×1024 for account avatars (the Google
+    Workspace photo on `info@` and staff accounts, which Gmail shows next to our emails). Avatars
+    are cropped to a circle; the "J" stays inside it.
   - `og-image.png`: the 1200×630 link preview.
 
 App-specific tokens stay in each app: portal's credit-score risk scale and sidebar, the website's

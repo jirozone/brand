@@ -12,6 +12,8 @@
 //   favicon-16.png, favicon-32.png
 //   apple-touch-icon.png, icon-192.png, full-bleed mark for home screens and PWAs: iOS and Android
 //   icon-512.png                        round the corners themselves
+//   profile-picture.png                 1024×1024 full-bleed mark for Google Workspace and other
+//                                       account avatars, which crop it to a circle
 //   og-image.png                        1200×630 link preview: wordmark and tagline on navy
 //
 // Regenerate with: npm run generate
@@ -128,7 +130,9 @@ const png = (svg, size) =>
 for (const [name, size] of [
 	['apple-touch-icon.png', 180],
 	['icon-192.png', 192],
-	['icon-512.png', 512]
+	['icon-512.png', 512],
+	// The "J" sits well inside the inscribed circle, so a round avatar crop never clips it.
+	['profile-picture.png', 1024]
 ]) {
 	await writeFile(out(name), await png(mark, size));
 }
