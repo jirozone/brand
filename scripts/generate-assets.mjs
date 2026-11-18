@@ -12,6 +12,8 @@
 //   favicon-16.png, favicon-32.png
 //   apple-touch-icon.png, icon-192.png, full-bleed mark for home screens and PWAs: iOS and Android
 //   icon-512.png                        round the corners themselves
+//   profile-picture.png                 1024×1024 white wordmark on navy for Google Workspace and
+//                                       other account avatars, which crop it to a circle
 //   og-image.png                        1200×630 link preview: wordmark and tagline on navy
 //
 // Regenerate with: npm run generate
@@ -154,6 +156,19 @@ tabPngs.forEach((data, i) => {
 	offset += data.length;
 });
 await writeFile(out('favicon.ico'), Buffer.concat([header, ...tabPngs]));
+
+// Account avatar: the white wordmark on navy. Avatars are cropped to a circle, so the wordmark
+// is 64% of the width, which keeps every corner of its ink box inside the circle.
+const AVATAR = 1024;
+const avatarScale = (AVATAR * 0.64) / wordW;
+const avatar = `<svg xmlns="http://www.w3.org/2000/svg" width="${AVATAR}" height="${AVATAR}" viewBox="0 0 ${AVATAR} ${AVATAR}">
+<rect width="${AVATAR}" height="${AVATAR}" fill="${NAVY}"/>
+<path transform="translate(${((AVATAR - wordW * avatarScale) / 2).toFixed(2)} ${((AVATAR - wordH * avatarScale) / 2).toFixed(2)}) scale(${avatarScale.toFixed(5)})" fill="${WHITE}" d="${wordD}"/>
+</svg>`;
+await writeFile(
+	out('profile-picture.png'),
+	await sharp(Buffer.from(avatar)).png({ compressionLevel: 9 }).toBuffer()
+);
 
 // Link preview: the wordmark at 40% of the width, the tagline below it in regular weight.
 const OG_W = 1200;
